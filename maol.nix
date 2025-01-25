@@ -12,11 +12,15 @@ stdenvNoCC.mkDerivation {
 
   installPhase = let
     config = ''
-      events {}
+      user nobody nobody;
       daemon off;
       pid /dev/null;
+      error_log /dev/stdout info;
+
+      events {}
       http {
         include ${nginx}/conf/mime.types;
+        access_log /dev/stdout;
 
         server {
           listen 8000;
@@ -24,8 +28,6 @@ stdenvNoCC.mkDerivation {
 
           root ${maol-content};
           index index.html;
-
-          access_log /dev/stdout;
 
           location / {
             try_files \$uri \$uri/ =404;
@@ -36,7 +38,7 @@ stdenvNoCC.mkDerivation {
 
     script = ''
       #!/bin/sh
-      ${nginx}/bin/nginx -c $out/nginx.conf -e stderr
+      ${nginx}/bin/nginx -c $out/nginx.conf
     '';
   in ''
     mkdir -p $out/bin
