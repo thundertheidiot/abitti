@@ -16,7 +16,7 @@ stdenvNoCC.mkDerivation {
     else
       fetchzip {
         url = "https://static.abitti.fi/etcher-usb/koe-etcher.zip";
-        hash = "sha256-nGTwlyuou3PUnMrdiukAm++ha6jIful4dBj9A4db8yk=";
+        hash = "sha256-h8cAUI57iQwKfqz3Ox8Y4Aq7IwIe5bWhtzGq+Pl9Tqg=";
       };
 
   nativeBuildInputs = [squashfsTools util-linux sleuthkit];
